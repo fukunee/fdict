@@ -1,0 +1,27 @@
+{
+  "name": "fdict",
+  "version": "1.2.2",
+  "description": "An english dictionary.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "dict"
+  ],
+  "author": "FuKun <fukun.ee@foxmail.com> (https://www.fukunee.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "buffer-dataview": "0.0.2",
+    "pako": "^1.0.4",
+    "text-encoding": "^0.6.4",
+    "xmldom": "^0.1.27"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=3.0.0"
+  }
+}
