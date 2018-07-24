@@ -2,19 +2,12 @@
 
 fdict is an english  dictionary .
 
-```
-var fdict = require('fdict');
 
-fdict.dictionary('dictionary.mdx').then(function(dictionary) {
-	dictionary.search({
-		phrase: 'hello*', /// '*' and '?' supported
-		max: 10 /// maximum results
-	}).then(function(foundWords) {
-		var word = '' + foundWords[0];
-		return dictionary.lookup(word); 
-	}).then(function(definitions) {
-		console.log('definitions:'); /// definition is array
-		console.log(definitions);
-	});
+```
+fdict.translate("phenomenon", true, function(definitions) {
+	console.log(definitions);
 });
 ```
+
+"phenomenon" is the word you are confused about
+"true" means you don't need familiar word's definition
