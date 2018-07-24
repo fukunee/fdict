@@ -1,7 +1,8 @@
 var mdictParser = require('./src/mdict-parser.js');
 var Promise = require('bluebird');
 
-exports.dictionary = function(filenames) {
+
+var dictionary = function(filenames) {
 	if (!Array.isArray(filenames)) {
 		filenames = [filenames];
 	}
@@ -29,3 +30,145 @@ exports.dictionary = function(filenames) {
 		});
 	});
 };
+// dictName:
+// OALD7
+// LDOCE5X
+// LDOCE5E
+// LDOCE5A
+// LDOCE5
+// CCALE
+// CALD2
+// AHD4
+module.exports.translate = function(keyWord, isExact, callback) {
+	dictionary('./dict/OALD7.mdx').then(function(dictOALD7) {
+		dictOALD7.search({
+			phrase: keyWord,
+			max: 1
+		}).then(function(foundOALD7) {
+			var word = '' + foundOALD7[0];
+			if (isExact) {
+				if (keyWord != word) {
+					return "";
+				}
+			}
+			return dictOALD7.lookup(word);
+		}).then(function(defOALD7) {
+			dictionary('./dict/LDOCE5X.mdx').then(function(dictLDOCE5X) {
+				dictLDOCE5X.search({
+					phrase: keyWord,
+					max: 1
+				}).then(function(foundLDOCE5X) {
+					var word = '' + foundLDOCE5X[0];
+					if (isExact) {
+						if (keyWord != word) {
+							return "";
+						}
+					}
+					return dictLDOCE5X.lookup(word);
+				}).then(function(defLDOCE5X) {
+					dictionary('./dict/LDOCE5E.mdx').then(function(dictLDOCE5E) {
+						dictLDOCE5E.search({
+							phrase: keyWord,
+							max: 1
+						}).then(function(foundLDOCE5E) {
+							var word = '' + foundLDOCE5E[0];
+							if (isExact) {
+								if (keyWord != word) {
+									return "";
+								}
+							}
+							return dictLDOCE5E.lookup(word);
+						}).then(function(defLDOCE5E) {
+							dictionary('./dict/LDOCE5A.mdx').then(function(dictLDOCE5A) {
+								dictLDOCE5A.search({
+									phrase: keyWord,
+									max: 1
+								}).then(function(foundLDOCE5A) {
+									var word = '' + foundLDOCE5A[0];
+									if (isExact) {
+										if (keyWord != word) {
+											return "";
+										}
+									}
+									return dictLDOCE5A.lookup(word);
+								}).then(function(defLDOCE5A) {
+									dictionary('./dict/LDOCE5.mdx').then(function(dictLDOCE5) {
+										dictLDOCE5.search({
+											phrase: keyWord,
+											max: 1
+										}).then(function(foundLDOCE5) {
+											var word = '' + foundLDOCE5[0];
+											if (isExact) {
+												if (keyWord != word) {
+													return "";
+												}
+											}
+											return dictLDOCE5.lookup(word);
+										}).then(function(defLDOCE5) {
+											dictionary('./dict/CCALE.mdx').then(function(dictCCALE) {
+												dictCCALE.search({
+													phrase: keyWord,
+													max: 1
+												}).then(function(foundCCALE) {
+													var word = '' + foundCCALE[0];
+													if (isExact) {
+														if (keyWord != word) {
+															return "";
+														}
+													}
+													return dictCCALE.lookup(word);
+												}).then(function(defCCALE) {
+													dictionary('./dict/CALD2.mdx').then(function(dictCALD2) {
+														dictCALD2.search({
+															phrase: keyWord,
+															max: 1
+														}).then(function(foundCALD2) {
+															var word = '' + foundCALD2[0];
+															if (isExact) {
+																if (keyWord != word) {
+																	return "";
+																}
+															}
+															return dictCALD2.lookup(word);
+														}).then(function(defCALD2) {
+															dictionary('./dict/AHD4.mdx').then(function(dictAHD4) {
+																dictAHD4.search({
+																	phrase: keyWord,
+																	max: 1
+																}).then(function(foundAHD4) {
+																	var word = '' + foundAHD4[0];
+																	if (isExact) {
+																		if (keyWord != word) {
+																			return "";
+																		}
+																	}
+																	return dictAHD4.lookup(word);
+																}).then(function(defAHD4) {
+																	var definition = {
+																		"defAHD4": defAHD4,
+																		"defCALD2": defCALD2,
+																		"defCCALE": defCCALE,
+																		"defLDOCE5": defLDOCE5,
+																		"defLDOCE5A": defLDOCE5A,
+																		"defLDOCE5E": defLDOCE5E,
+																		"defLDOCE5X": defLDOCE5X,
+																		"defOALD7": defOALD7
+																	}
+																	callback(definition);
+																})
+															})
+														})
+													})
+												})
+											})
+										})
+									})
+								})
+							})
+						})
+					})
+				})
+			})
+		});
+	});
+}
