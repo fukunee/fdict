@@ -1,4 +1,4 @@
-var mdictParser = require('./src/mdict-parser.js');
+var mdictParser = require(__dirname + '/src/mdict-parser.js');
 var Promise = require('bluebird');
 
 
@@ -40,7 +40,7 @@ var dictionary = function(filenames) {
 // CALD2
 // AHD4
 module.exports.translate = function(keyWord, isExact, callback) {
-	dictionary('./dict/OALD7.mdx').then(function(dictOALD7) {
+	dictionary(__dirname + '/dict/OALD7.mdx').then(function(dictOALD7) {
 		dictOALD7.search({
 			phrase: keyWord,
 			max: 1
@@ -53,7 +53,7 @@ module.exports.translate = function(keyWord, isExact, callback) {
 			}
 			return dictOALD7.lookup(word);
 		}).then(function(defOALD7) {
-			dictionary('./dict/LDOCE5X.mdx').then(function(dictLDOCE5X) {
+			dictionary(__dirname + '/dict/LDOCE5X.mdx').then(function(dictLDOCE5X) {
 				dictLDOCE5X.search({
 					phrase: keyWord,
 					max: 1
@@ -66,7 +66,7 @@ module.exports.translate = function(keyWord, isExact, callback) {
 					}
 					return dictLDOCE5X.lookup(word);
 				}).then(function(defLDOCE5X) {
-					dictionary('./dict/LDOCE5E.mdx').then(function(dictLDOCE5E) {
+					dictionary(__dirname + '/dict/LDOCE5E.mdx').then(function(dictLDOCE5E) {
 						dictLDOCE5E.search({
 							phrase: keyWord,
 							max: 1
@@ -79,7 +79,7 @@ module.exports.translate = function(keyWord, isExact, callback) {
 							}
 							return dictLDOCE5E.lookup(word);
 						}).then(function(defLDOCE5E) {
-							dictionary('./dict/LDOCE5A.mdx').then(function(dictLDOCE5A) {
+							dictionary(__dirname + '/dict/LDOCE5A.mdx').then(function(dictLDOCE5A) {
 								dictLDOCE5A.search({
 									phrase: keyWord,
 									max: 1
@@ -92,7 +92,7 @@ module.exports.translate = function(keyWord, isExact, callback) {
 									}
 									return dictLDOCE5A.lookup(word);
 								}).then(function(defLDOCE5A) {
-									dictionary('./dict/LDOCE5.mdx').then(function(dictLDOCE5) {
+									dictionary(__dirname + '/dict/LDOCE5.mdx').then(function(dictLDOCE5) {
 										dictLDOCE5.search({
 											phrase: keyWord,
 											max: 1
@@ -105,7 +105,7 @@ module.exports.translate = function(keyWord, isExact, callback) {
 											}
 											return dictLDOCE5.lookup(word);
 										}).then(function(defLDOCE5) {
-											dictionary('./dict/CCALE.mdx').then(function(dictCCALE) {
+											dictionary(__dirname + '/dict/CCALE.mdx').then(function(dictCCALE) {
 												dictCCALE.search({
 													phrase: keyWord,
 													max: 1
@@ -118,7 +118,7 @@ module.exports.translate = function(keyWord, isExact, callback) {
 													}
 													return dictCCALE.lookup(word);
 												}).then(function(defCCALE) {
-													dictionary('./dict/CALD2.mdx').then(function(dictCALD2) {
+													dictionary(__dirname + '/dict/CALD2.mdx').then(function(dictCALD2) {
 														dictCALD2.search({
 															phrase: keyWord,
 															max: 1
@@ -131,7 +131,7 @@ module.exports.translate = function(keyWord, isExact, callback) {
 															}
 															return dictCALD2.lookup(word);
 														}).then(function(defCALD2) {
-															dictionary('./dict/AHD4.mdx').then(function(dictAHD4) {
+															dictionary(__dirname + '/dict/AHD4.mdx').then(function(dictAHD4) {
 																dictAHD4.search({
 																	phrase: keyWord,
 																	max: 1
@@ -145,14 +145,14 @@ module.exports.translate = function(keyWord, isExact, callback) {
 																	return dictAHD4.lookup(word);
 																}).then(function(defAHD4) {
 																	var definition = {
-																		"defAHD4": defAHD4,
-																		"defCALD2": defCALD2,
-																		"defCCALE": defCCALE,
-																		"defLDOCE5": defLDOCE5,
-																		"defLDOCE5A": defLDOCE5A,
-																		"defLDOCE5E": defLDOCE5E,
-																		"defLDOCE5X": defLDOCE5X,
-																		"defOALD7": defOALD7
+																		"defAHD4": defAHD4[0],
+																		"defCALD2": defCALD2[0],
+																		"defCCALE": defCCALE[0],
+																		"defLDOCE5": defLDOCE5[0],
+																		"defLDOCE5A": defLDOCE5A[0],
+																		"defLDOCE5E": defLDOCE5E[0],
+																		"defLDOCE5X": defLDOCE5X[0],
+																		"defOALD7": defOALD7[0]
 																	}
 																	callback(definition);
 																})
